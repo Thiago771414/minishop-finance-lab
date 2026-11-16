@@ -153,7 +153,7 @@ export function FinanceChatApp() {
           <SheetContent side="left" className="w-[85vw] max-w-xs bg-sidebar p-0">
             <SheetTitle className="sr-only">Histórico de conversas</SheetTitle>
             <SheetDescription className="sr-only">Conversas de demonstração salvas neste navegador.</SheetDescription>
-            {history}
+            <div className="h-full pt-8">{history}</div>
           </SheetContent>
         </Sheet>
 
