@@ -39,6 +39,7 @@ export const Composer = forwardRef<
   const empty = !value.trim();
 
   return (
+    <div>
     <form
       onSubmit={(e) => {
         e.preventDefault();
@@ -79,13 +80,10 @@ export const Composer = forwardRef<
       >
         <SendHorizontal />
       </Button>
-      <p id="fin-message-help" className="sr-only">
-        Enter envia. Shift mais Enter quebra a linha.
-      </p>
-      <span className="sr-only" role="status" aria-live="polite">
-        {hint ?? ""}
-      </span>
-      {hint ? <span className="sr-only">{hint}</span> : null}
     </form>
+      <p id="fin-message-help" className="mt-1 px-1 text-[11px] text-muted-foreground" role="status" aria-live="polite">
+        {hint ? <span className="font-medium text-destructive">{hint}</span> : "Enter envia · Shift+Enter quebra a linha"}
+      </p>
+    </div>
   );
 });
