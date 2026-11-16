@@ -41,7 +41,7 @@ export function normalize(s: string): string {
 }
 
 const REAL_DATA =
-  /saldos? reai?s?\b|dados reais|contas? reai?s?\b|tempo real|real ?time|ao vivo|conect|vincul|integr(e|ar|acao)|\blog(in|ar)\b|entrar no (meu )?banco|acess(e|ar) (o |a |meu |minha )?(banco|conta)|open ?finance|banco de verdade|atualiza/;
+  /saldos? (real|reais)\b|dados reais|contas? (real|reais)\b|tempo real|real ?time|ao vivo|conect|vincul|integr(e|ar|acao)|\blog(in|ar)\b|entrar no (meu )?banco|acess(e|ar) (o |a |meu |minha )?(banco|conta)|open ?finance|banco de verdade|atualiza/;
 const SENSITIVE =
   /senha|\bcpf\b|numero do cartao|\bcvv\b|upload|anex(ar|o)|envi(ar|o) (um |meu )?documento|meus documentos|credencia|\btoken\b|api ?key|chave (de api|secreta)/;
 const OPERATION =
