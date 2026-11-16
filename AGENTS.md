@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+<!-- AGENT-MEMORY:BEGIN -->
+- UI reads finance data only through the async `FinanceService` interface (`src/services/finance`); Etapa 1 uses `DemoFinanceService` over `src/data/demoData.ts`, `RemoteFinanceService` is a stub — keeps the backend swappable later.
+- Chat answers come from the local intent interpreter (`src/agent/intent.ts`) and `respond.ts` building typed blocks; never hardcode totals in responses — every number must be computed from records.
+- Money math uses integer cents inside the service to avoid float drift.
+- Conversation history lives only in browser localStorage (`useConversations`), read in effects for SSR safety.
+<!-- AGENT-MEMORY:END -->
