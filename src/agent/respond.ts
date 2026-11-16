@@ -3,7 +3,7 @@
  * Todo número exibido vem de um registro ou de um cálculo do serviço —
  * nenhum total é escrito à mão aqui.
  */
-import { ACCOUNT_TYPE_LABEL, formatDate, formatUSD, plural } from "@/lib/format";
+import { formatDate, formatUSD, plural } from "@/lib/format";
 import type {
   Account,
   FinanceService,
@@ -343,7 +343,7 @@ export async function respond(
         {
           label: "Saídas confirmadas",
           value: formatUSD(s.confirmedOutflow),
-          hint: plural(s.byCategory[0]?.confirmedOutflow ? s.transactions.filter((t) => !t.pending && t.amount > 0).length : 0, "registro", "registros"),
+          hint: plural(s.transactions.filter((t) => !t.pending && t.amount > 0).length, "registro", "registros"),
           tone: "outflow" as const,
         },
         {
@@ -435,4 +435,3 @@ export async function respond(
   }
 }
 
-export { ACCOUNT_TYPE_LABEL };
