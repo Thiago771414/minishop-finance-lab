@@ -13,7 +13,7 @@ import type {
   TransactionFilters,
 } from "@/services/finance/types";
 import { parseIntent, type IntentKind, type ParsedIntent } from "./intent";
-import type { Block, ChartRow, TransactionRow } from "./types";
+import type { Block, ChartRow, StatItem, TransactionRow } from "./types";
 
 export const SUGGESTIONS = [
   "Mostrar minhas contas",
@@ -254,7 +254,7 @@ export async function respond(
       const credit = list.filter((b) => b.nature === "credit");
       const sumC = (xs: number[]) => xs.reduce((s, v) => s + Math.round(v * 100), 0) / 100;
       const creditAvail = credit.filter((b) => b.availableBalance != null);
-      const items = [];
+      const items: StatItem[] = [];
       if (cash.length) {
         items.push({
           label: "Dinheiro em conta (saldo atual)",
@@ -339,7 +339,7 @@ export async function respond(
           text: `Com ${cat}, as saídas confirmadas somam ${formatUSD(s.confirmedOutflow)} (${plural(s.confirmedCount, "registro", "registros")}).${pendingTxt}`,
         });
       }
-      const items = [
+      const items: StatItem[] = [
         {
           label: "Saídas confirmadas",
           value: formatUSD(s.confirmedOutflow),
