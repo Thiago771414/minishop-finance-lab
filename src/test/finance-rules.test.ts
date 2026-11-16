@@ -58,6 +58,14 @@ describe("Regras financeiras da amostra local", () => {
     expect(s.consumption.count).toBe(6);
   });
 
+  it("contagem por categoria considera só as saídas (transferência: 1 saída)", async () => {
+    const s = await service.getSpendingSummary();
+    const transf = s.byCategory.find((c) => c.category === "transferência")!;
+    expect(transf.confirmedOutflowCount).toBe(1);
+    expect(transf.confirmedOutflow).toBe(100);
+    expect(transf.confirmedInflow).toBe(180);
+  });
+
   it("filtros recalculam totais sem alterar os dados originais", async () => {
     const before = JSON.stringify(DEMO_TRANSACTIONS);
     const s = await service.getSpendingSummary({
@@ -68,7 +76,6 @@ describe("Regras financeiras da amostra local", () => {
     expect(s.totalRecords).toBe(4);
     expect(s.confirmedOutflow).toBe(66.2);
     expect(s.confirmedInflow).toBe(180);
-    s.transactions[0]!.description;
     expect(JSON.stringify(DEMO_TRANSACTIONS)).toBe(before);
     expect((await service.getSpendingSummary()).totalRecords).toBe(10);
   });

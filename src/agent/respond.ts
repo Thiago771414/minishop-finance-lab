@@ -181,9 +181,9 @@ function chartRows(summary: SpendingSummary, excludeNonConsumption: boolean): Ch
     .map((c) => ({
       category: c.category,
       confirmed: c.confirmedOutflow,
-      confirmedCount: c.confirmedCount,
+      confirmedCount: c.confirmedOutflowCount,
       pending: c.pendingOutflow,
-      pendingCount: c.pendingCount,
+      pendingCount: c.pendingOutflowCount,
     }));
 }
 

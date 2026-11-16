@@ -205,7 +205,7 @@ function CategoryChartBlock({ caption, valueLabel, rows }: { caption: string; va
           <tr className="border-b">
             <th scope="col" className={th}>Categoria</th>
             <th scope="col" className={thNum}>{valueLabel}</th>
-            <th scope="col" className={thNum}>Registros confirmados</th>
+            <th scope="col" className={thNum}>Saídas confirmadas (registros)</th>
             <th scope="col" className={thNum}>Pendente (fora do total)</th>
           </tr>
         </thead>

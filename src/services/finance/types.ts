@@ -81,6 +81,9 @@ export interface CategoryTotals {
   pendingInflow: number;
   confirmedCount: number;
   pendingCount: number;
+  /** Registros confirmados com valor positivo (saídas). */
+  confirmedOutflowCount: number;
+  pendingOutflowCount: number;
 }
 
 export interface SpendingSummary {

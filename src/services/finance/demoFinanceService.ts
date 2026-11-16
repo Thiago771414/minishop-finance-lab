@@ -56,7 +56,7 @@ export function summarize(
   filters: TransactionFilters,
   referenceDate: string,
 ): SpendingSummary {
-  type Acc = { co: number; ci: number; po: number; pi: number; cc: number; pc: number };
+  type Acc = { co: number; ci: number; po: number; pi: number; cc: number; pc: number; coN: number; poN: number };
   const byCat = new Map<Category, Acc>();
   let confirmedCount = 0;
   let pendingCount = 0;
@@ -69,13 +69,14 @@ export function summarize(
 
   for (const t of txs) {
     const cents = toCents(t.amount);
-    const acc = byCat.get(t.category) ?? { co: 0, ci: 0, po: 0, pi: 0, cc: 0, pc: 0 };
+    const acc = byCat.get(t.category) ?? { co: 0, ci: 0, po: 0, pi: 0, cc: 0, pc: 0, coN: 0, poN: 0 };
     if (t.pending) {
       pendingCount++;
       acc.pc++;
       if (cents > 0) {
         pOut += cents;
         acc.po += cents;
+        acc.poN++;
       } else {
         pIn += -cents;
         acc.pi += -cents;
@@ -86,6 +87,7 @@ export function summarize(
       if (cents > 0) {
         cOut += cents;
         acc.co += cents;
+        acc.coN++;
         if (!NON_CONSUMPTION_CATEGORIES.includes(t.category)) {
           consCents += cents;
           consCount++;
@@ -109,6 +111,8 @@ export function summarize(
         pendingInflow: fromCents(a.pi),
         confirmedCount: a.cc,
         pendingCount: a.pc,
+        confirmedOutflowCount: a.coN,
+        pendingOutflowCount: a.poN,
       };
     })
     .sort((a, b) => b.confirmedOutflow - a.confirmedOutflow);
